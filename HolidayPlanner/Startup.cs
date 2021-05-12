@@ -36,6 +36,10 @@ namespace HolidayPlanner
                 options.SupportedCultures = culturesSuported;
                 options.SupportedUICultures = culturesSuported;
             });
+            services.AddHttpClient("restClient", c =>
+            {
+                c.BaseAddress = new Uri("https://date.nager.at/Api/v2/PublicHolidays/");
+            });
             services.AddRazorPages();
         }
 

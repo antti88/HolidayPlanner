@@ -41,29 +41,10 @@ namespace HolidayPlanner.Pages
         {
             Debug.WriteLine("End Date fired");
         }
-        public void OnPost(DateTime startDate, DateTime endDate)
+        public async Task OnPostAsync(DateTime startDate, DateTime endDate)
         {
-            Debug.WriteLine("CalculateDates fired: " + startDate +"\n" +endDate);
-            Debug.WriteLine("class dates: " + StartDate + " " + EndDate);
-            bool isValid = _HolidayPlanner.CheckIsDateOver(startDate, endDate,50);
-            var cultureInfo = new CultureInfo("fi-FI");
-            Debug.WriteLine("IS VALID: " + isValid);
-            string pStart = "1 April " + startDate.Year;
-            string pEnd = "31 March " + (startDate.Year+1);
-            DateTime periodStart = DateTime.Parse(pStart, cultureInfo);
-            DateTime periodEnd = DateTime.Parse(pEnd, cultureInfo);
-            bool isInBetween = _HolidayPlanner.CheckIsDateBetweenTimePeriod(startDate, periodStart, periodEnd);
-            Debug.WriteLine("Start is between time period: " + isInBetween);
-            pStart = "1 April " + endDate.Year;
-            pEnd = "31 March " + (endDate.Year+1);
-            periodStart = DateTime.Parse(pStart, cultureInfo);
-            periodEnd = DateTime.Parse(pEnd, cultureInfo);
-            isInBetween = _HolidayPlanner.CheckIsDateBetweenTimePeriod(endDate, periodStart, periodEnd);
-            Debug.WriteLine("EndDate is between time period: " + isInBetween);
-            bool isDateValid = _HolidayPlanner.CheckIsDateChronologicalOrder(startDate, endDate);
-            Debug.WriteLine("Is date valid chronological order: " + isDateValid);
-
-            _HolidayPlanner.CalculateHolidays(startDate);
+            int workDays = await _HolidayPlanner.CalculateWorkDatesFromTimePeriod(startDate, endDate, "FI","fi-FI");
+            Debug.WriteLine("WORKDAYS: " + workDays);
         }
 
     }
