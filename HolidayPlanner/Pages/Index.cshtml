@@ -1,0 +1,24 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Home page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Holiday planner</h1>
+    <p>Holiday period calculator.</p>
+</div>
+<form method="post">
+    <div class="md-form" style="width:50%">
+        <!--The date represented by 'TodoStartDate' is read from the model and is of type 'DateTime'-->
+        <input class="form-control" type="date" asp-for="StartDate" asp-format="{0:dd/MM/yyyyTHH:mm:ss}"/>
+        
+    </div>
+    <div class="md-form" style="width:50%">
+        <!--The date represented by 'TodoStartDate' is read from the model and is of type 'DateTime'-->
+        <input class="form-control" type="date" asp-for="EndDate" asp-format="{0:dd/MM/yyyyTHH:mm:ss}"/>
+    </div>
+    <div>
+        <button type="submit">Submit</button>
+    </div>
+</form>
