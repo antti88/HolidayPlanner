@@ -19,6 +19,7 @@ namespace HolidayPlanner.Pages
         public DateTime StartDate { get; set; }
         [BindProperty, DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true), DataType(DataType.Date)]
         public DateTime EndDate { get; set; }
+        public string WorkDaysMsg { get; set; }
         public Model.HolidayPlanner _HolidayPlanner { get; set; }
         public IndexModel(ILogger<IndexModel> logger, IHttpClientFactory httpClientFactory)
         {
@@ -43,8 +44,17 @@ namespace HolidayPlanner.Pages
         }
         public async Task OnPostAsync(DateTime startDate, DateTime endDate)
         {
-            int workDays = await _HolidayPlanner.CalculateWorkDatesFromTimePeriod(startDate, endDate, "FI","fi-FI");
+            int workDays = await _HolidayPlanner.GetHolidayCountFromTimeperiod(startDate, endDate, "FI","fi-FI");
             Debug.WriteLine("WORKDAYS: " + workDays);
+            if(workDays == 0)
+            {
+                WorkDaysMsg = _HolidayPlanner.msg;
+
+            }
+            else
+            {
+                WorkDaysMsg = "Time period will consume " + workDays + " holidays";
+            }
         }
 
     }

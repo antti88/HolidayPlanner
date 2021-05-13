@@ -8,6 +8,24 @@
     <h1 class="display-4">Holiday planner</h1>
     <p>Holiday period calculator.</p>
 </div>
+<div>
+    <p>
+        <ul>
+            <li>
+                The maximum length of the time span is 50 days
+            </li>
+            <li>
+                The whole time span has to be within the same holiday period that begins on the 1st
+                of April and ends on the 31st of March. For example:
+                <br />○ 1.12.2021 - 2.1.2022 is a valid time span for a holiday
+                <br />○ 1.3.2021 - 1.4.2021 is not a valid time span for a holiday
+            </li>
+            <li>
+                The dates for the time span must be in chronological order
+            </li>
+        </ul>
+    </p>
+</div>
 <form method="post">
     <div class="md-form" style="width:50%">
         <!--The date represented by 'TodoStartDate' is read from the model and is of type 'DateTime'-->
@@ -22,3 +40,6 @@
         <button type="submit">Submit</button>
     </div>
 </form>
+<div style="margin-top:50px">
+    <h3>@Model.WorkDaysMsg</h3>
+</div>
